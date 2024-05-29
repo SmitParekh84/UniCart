@@ -1,0 +1,40 @@
+<!-- Footer -->
+<%- include("../partials/header.ejs")%>
+
+  <!--
+    - MAIN
+  -->
+  <main>
+    <!--
+      - CATEGORY
+    -->
+
+    <%- include("../category/topcategory.ejs") %>
+      <!--
+      - PRODUCT
+    -->
+
+      <div class="product-container">
+        <div class="container">
+          <!--
+          - SIDEBAR
+        -->
+          <%- include("../partials/sidebar.ejs") %>
+
+            <div class="product-box">
+              <!--
+            - NEW PRODUCT GRID
+          -->
+
+              <% if( route==='clothes') { %>
+                <%- include("../product/clothes.ejs") %>
+                  <% } else if( route==='electronics' ) { %> <%- include("../product/electronics.ejs") %>
+                      <% } else if( route==='furniture' ) { %> <%- include("../product/furniture.ejs") %>
+                          <% } else if ( route==='footwear' ) { %> <%- include("../product/footwear.ejs") %>
+                              <% } %>
+            </div>
+        </div>
+      </div>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
