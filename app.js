@@ -2,17 +2,26 @@ import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
 import env from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 env.config();
+
+// Get current directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
-const apiUrl =process.env.API_URL ;
+const apiUrl = process.env.API_URL;
 
+// Set up EJS as the view engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static("public"));
+// Serve static files - use absolute path
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // Function to generate a random index within a specified range
 function getRandomIndex(max) {
@@ -114,8 +123,6 @@ app.get("/footwear", async (req, res) => {
     res.status(500).send("Error fetching products");
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
